@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".audiances.SettingFragment">
+        <RelativeLayout
+            android:id="@+id/top_bar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:orientation="horizontal"
+            android:background="@color/colorPrimaryDark"
+            android:layout_alignParentTop="true">
+
+            <ImageButton
+                android:id="@+id/save_changes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_done_black_24dp"
+                android:background="@color/colorPrimaryDark"
+                android:layout_alignParentEnd="true"
+                android:tint="#FFF"
+                android:padding="20dp"/>
+            <ImageButton
+                android:id="@+id/ignore_changes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_close_black_24dp"
+                android:background="@color/colorPrimaryDark"
+                android:layout_alignParentStart="true"
+                android:tint="#FFF"
+                android:padding="20dp"/>
+
+        </RelativeLayout>
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/settings_profile_image"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/top_bar"
+            android:src="@drawable/profile" />
+
+        <TextView
+            android:id="@+id/profile_image_change_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/settings_profile_image"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="4dp"
+            android:layout_marginRight="10dp"
+            android:text="Change Profile"
+            android:textColor="@android:color/black"
+            android:textSize="17sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/settings_phone_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/profile_image_change_btn"
+            android:layout_margin="15dp"
+            android:hint="Phone Number..."
+            android:padding="10dp" />
+
+        <EditText
+            android:id="@+id/settings_full_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/settings_phone_number"
+            android:layout_margin="15dp"
+            android:hint="Full Name..."
+            android:padding="10dp" />
+
+        <EditText
+            android:id="@+id/settings_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/settings_full_name"
+            android:layout_margin="15dp"
+            android:hint="Address..."
+            android:padding="10dp" />
+
+
+    </RelativeLayout>
+</layout>

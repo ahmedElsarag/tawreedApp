@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#FDBC00</color>
+    <color name="colorPrimaryDark">#FDBC00</color>
+    <color name="colorAccent">#0243ff</color>
+    <color name="textColorPrimary">#212121</color>
+    <color name="textColorSecondary">#757575</color>
+    <color name="textInputOutlineColor">#7853FE</color>
+    <color name="colorTextSubtitle">#4e4e4e</color>
+    <color name="colorTextTitle">#262626</color>
+    <color name="divider">#BDBDBD</color>
+    <color name="numberBox">#88FDBC00</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorRed">#FB0303</color>
+</resources>
