@@ -62,7 +62,6 @@ public class SellerHomeFragment extends Fragment {
                 list.add(products);
                 adapter.setList(list);
                 adapter.notifyDataSetChanged();
-                Toast.makeText(getActivity(),"lengnth :"+list.size(),Toast.LENGTH_LONG).show();
             }
 
             @Override

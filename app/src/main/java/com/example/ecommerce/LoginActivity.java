@@ -29,6 +29,7 @@ public class LoginActivity extends AppCompatActivity {
 
     ActivityLoginBinding binding;
     private String parentDbName = "Users";
+    Dialog dialog = new Dialog();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,6 +83,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void AllowAccessToAccount(final String phone, final String password) {
+        dialog.loadDialog(LoginActivity.this);
         final DatabaseReference RootRef;
         RootRef = FirebaseDatabase.getInstance().getReference();
 
@@ -105,6 +107,7 @@ public class LoginActivity extends AppCompatActivity {
 
                               if (parentDbName.equals("Admins")){
                                   Toast.makeText(LoginActivity.this, "Admin logged in Successfully...", Toast.LENGTH_SHORT).show();
+                                  dialog.dismisDialog();
                                   Intent intent = new Intent(LoginActivity.this, AdminMainActivity.class);
                                   startActivity(intent);
                                   finish();
@@ -119,12 +122,14 @@ public class LoginActivity extends AppCompatActivity {
                         else
                         {
                             Toast.makeText(LoginActivity.this, "Password is incorrect.", Toast.LENGTH_SHORT).show();
+                            dialog.dismisDialog();
                         }
                     }
                 }
                 else
                 {
                     Toast.makeText(LoginActivity.this, "Account with this " + phone + " number do not exists.", Toast.LENGTH_SHORT).show();
+                    dialog.dismisDialog();
                 }
             }
 

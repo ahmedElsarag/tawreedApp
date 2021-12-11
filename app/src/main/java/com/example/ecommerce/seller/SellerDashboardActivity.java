@@ -41,6 +41,7 @@ public class SellerDashboardActivity extends AppCompatActivity {
                     } case R.id.logout:{
                         firebaseAuth.signOut();
                         startActivity(new Intent(SellerDashboardActivity.this,SellerLoginActivity.class));
+                        finish();
                     }
                 }
 
@@ -50,5 +51,11 @@ public class SellerDashboardActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finishAffinity();
     }
 }

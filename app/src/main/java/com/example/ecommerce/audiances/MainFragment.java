@@ -69,12 +69,9 @@ public class MainFragment extends Fragment {
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
                 Products products = dataSnapshot.getValue(Products.class);
-                Toast.makeText(getActivity(),products.getPname(),Toast.LENGTH_LONG).show();
                 list.add(products);
-
                 adapter.setNotes(list);
                 adapter.notifyDataSetChanged();
-                Toast.makeText(getActivity(),"lengnth :"+list.size(),Toast.LENGTH_LONG).show();
             }
 
             @Override

@@ -71,7 +71,21 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()){
-                            Toast.makeText(context, "error"+ list.get(position).getPhone(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "deleted"+ list.get(position).getPhone(), Toast.LENGTH_SHORT).show();
+
+                            list.remove(position);
+                            notifyDataSetChanged();
+                        } else
+                            Toast.makeText(context, "error", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                //-------------------remove adminview cart-------------------
+                databaseReference = FirebaseDatabase.getInstance().getReference().child("Cart List").child("Admin View");
+                databaseReference.child(list.get(position).getPhone()).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()){
+                            Toast.makeText(context, "deleted"+ list.get(position).getPhone(), Toast.LENGTH_SHORT).show();
 
                             list.remove(position);
                             notifyDataSetChanged();

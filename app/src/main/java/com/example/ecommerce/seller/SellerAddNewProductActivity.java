@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.ecommerce.Dialog;
 import com.example.ecommerce.R;
 import com.example.ecommerce.databinding.ActivitySellerAddNewProductBinding;
 import com.example.ecommerce.model.Products;
@@ -45,6 +46,7 @@ public class SellerAddNewProductActivity extends AppCompatActivity {
     StorageReference storageImgeReference;
     DatabaseReference productsRef,sellerRef;
     List<Products> list = new ArrayList<>();
+    Dialog dialog = new Dialog();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +68,7 @@ public class SellerAddNewProductActivity extends AppCompatActivity {
         binding.addNewProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                dialog.loadDialog(SellerAddNewProductActivity.this);
                 storeProductInfo();
             }
         });
@@ -147,6 +150,7 @@ public class SellerAddNewProductActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             downloadUrl = task.getResult().toString();
                             Toast.makeText(SellerAddNewProductActivity.this, "done", Toast.LENGTH_LONG).show();
+                            dialog.dismisDialog();
                             saveProductInfoToDatabase();
                         }
                     }

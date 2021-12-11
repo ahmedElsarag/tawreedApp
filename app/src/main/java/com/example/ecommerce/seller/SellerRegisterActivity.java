@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.ecommerce.Dialog;
 import com.example.ecommerce.R;
 import com.example.ecommerce.databinding.ActivitySellerRegisterBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -25,7 +26,7 @@ public class SellerRegisterActivity extends AppCompatActivity implements View.On
     ActivitySellerRegisterBinding binding;
     FirebaseAuth firebaseAuth;
     String mail, pass, phone, name, address;
-
+    Dialog dialog = new Dialog();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +47,7 @@ public class SellerRegisterActivity extends AppCompatActivity implements View.On
             }
             case R.id.seller_reg_btn: {
                 createAccount();
+                dialog.loadDialog(SellerRegisterActivity.this);
                 break;
             }
         }
@@ -78,6 +80,7 @@ public class SellerRegisterActivity extends AppCompatActivity implements View.On
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 Toast.makeText(SellerRegisterActivity.this, "account created", Toast.LENGTH_LONG).show();
+                                dialog.dismisDialog();
                                 startActivity(new Intent(SellerRegisterActivity.this,SellerLoginActivity.class));
                             }
                         });

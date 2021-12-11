@@ -66,5 +66,7 @@ dependencies {
     //lottie animation
     def lottieVersion = "3.4.0"
     implementation "com.airbnb.android:lottie:$lottieVersion"
+    //sweet dialoge
+    implementation 'com.github.f0ris.sweetalert:library:1.5.6'
 }
 apply plugin: 'com.google.gms.google-services'

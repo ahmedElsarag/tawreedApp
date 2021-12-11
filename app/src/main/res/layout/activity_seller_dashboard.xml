@@ -14,7 +14,8 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:layout_alignParentBottom="true"
-            android:background="@drawable/bottom_bar"
+            android:background="@android:color/white"
+            android:elevation="20dp"
             app:cnb_menuResource="@menu/bottom_bar" />
 
         <FrameLayout

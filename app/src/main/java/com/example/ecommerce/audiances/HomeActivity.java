@@ -120,6 +120,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             Paper.book().delete(Prevalent.UserPasswordKey);
             startActivity(new Intent(HomeActivity.this, LoginActivity.class));
             finish();
+        }else  if (id==R.id.nav_home){
+            selectedFragment = new MainFragment();
+            getSupportFragmentManager().beginTransaction().replace(R.id.container,selectedFragment).commit();
         }
 
 
