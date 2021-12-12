@@ -76,6 +76,7 @@ public class EditProductActivity extends AppCompatActivity implements View.OnCli
                 dialog.dismisDialog();
                 Intent intent = new Intent(EditProductActivity.this, AdminMainActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
     }

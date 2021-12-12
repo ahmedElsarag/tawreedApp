@@ -19,4 +19,11 @@ public class Dialog {
     public void dismisDialog() {
         pDialog.dismissWithAnimation();
     }
+
+    public void alertDialog(Context context){
+     pDialog = new SweetAlertDialog(context);
+        pDialog.setTitleText("DONE");
+        pDialog.setContentText("Product aded to cart");
+        pDialog.show();
+    }
 }

@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
+import com.example.ecommerce.Dialog;
 import com.example.ecommerce.R;
 import com.example.ecommerce.databinding.ActivityProductDetailsBinding;
 import com.example.ecommerce.prevalent.Prevalent;
@@ -34,6 +35,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
     String saveCurrentDate, saveCurrentTime, number;
     private String state = "normal";
     DatabaseReference databaseReference;
+    Dialog dialog = new Dialog();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +72,6 @@ public class ProductDetailsActivity extends AppCompatActivity {
         binding.numberButton.setOnValueChangeListener(new ElegantNumberButton.OnValueChangeListener() {
             @Override
             public void onValueChange(ElegantNumberButton view, int oldValue, int newValue) {
-                Toast.makeText(ProductDetailsActivity.this, "num = " + newValue, Toast.LENGTH_LONG).show();
                 number = Integer.toString(newValue);
             }
         });
@@ -78,6 +79,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
         binding.addToCartBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                dialog.alertDialog(ProductDetailsActivity.this);
 
                 if (state.equals("placed") || state.equals("shiped")) {
                     Toast.makeText(ProductDetailsActivity.this, "you can't add more products until first order done", Toast.LENGTH_LONG)

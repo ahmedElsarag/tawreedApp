@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.ecommerce.Dialog;
 import com.example.ecommerce.R;
 import com.example.ecommerce.databinding.ActivityConfirmOrderBinding;
 import com.example.ecommerce.prevalent.Prevalent;
@@ -27,6 +28,8 @@ public class ConfirmOrderActivity extends AppCompatActivity {
     String name, phone, address, city;
     int totalPrice;
     DatabaseReference databaseReference;
+    Dialog dialog = new Dialog();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +37,7 @@ public class ConfirmOrderActivity extends AppCompatActivity {
 
         databaseReference = FirebaseDatabase.getInstance().getReference();
         Intent intent = getIntent();
-        totalPrice = intent.getIntExtra("total",0);
+        totalPrice = intent.getIntExtra("total", 0);
 
         binding.confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,6 +46,7 @@ public class ConfirmOrderActivity extends AppCompatActivity {
                 phone = binding.mobileNumber.getText().toString();
                 address = binding.address.getText().toString();
                 city = binding.city.getText().toString();
+                dialog.loadDialog(ConfirmOrderActivity.this);
                 confirmOrder();
             }
         });
@@ -65,18 +69,20 @@ public class ConfirmOrderActivity extends AppCompatActivity {
         orderMap.put("city", city);
         orderMap.put("date", saveCurrentDate);
         orderMap.put("time", saveCurrentTime);
-        orderMap.put("state","not shiped");
+        orderMap.put("state", "not shiped");
         databaseReference.child("Orders").child(Prevalent.currentOnlineUser.getPhone())
                 .updateChildren(orderMap)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()){
+                        if (task.isSuccessful()) {
                             databaseReference.child("Cart List").child("User View").child(Prevalent.currentOnlineUser.getPhone())
                                     .removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
-                                    Toast.makeText(ConfirmOrderActivity.this,"done",Toast.LENGTH_LONG).show();
+                                    dialog.dismisDialog();
+                                    Toast.makeText(ConfirmOrderActivity.this, "done", Toast.LENGTH_LONG).show();
+                                    finish();
                                 }
                             });
                         }
