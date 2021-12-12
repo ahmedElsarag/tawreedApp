@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.ecommerce.Dialog;
 import com.example.ecommerce.R;
 import com.example.ecommerce.databinding.ActivityEditProductBinding;
 import com.example.ecommerce.seller.SellerProductCategoryActivity;
@@ -24,6 +25,7 @@ public class EditProductActivity extends AppCompatActivity implements View.OnCli
     String id,name,price,desc;
     ActivityEditProductBinding binding;
     DatabaseReference databaseReference;
+    Dialog dialog = new Dialog();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,8 +60,9 @@ public class EditProductActivity extends AppCompatActivity implements View.OnCli
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()){
-                    Toast.makeText(EditProductActivity.this,"product updated",Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(EditProductActivity.this, SellerProductCategoryActivity.class);
+                    Toast.makeText(EditProductActivity.this,"product updated",Toast.LENGTH_SHORT).show();
+                    dialog.dismisDialog();
+                    Intent intent = new Intent(EditProductActivity.this, AdminMainActivity.class);
                     startActivity(intent);
                 }
             }
@@ -70,7 +73,8 @@ public class EditProductActivity extends AppCompatActivity implements View.OnCli
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 Toast.makeText(EditProductActivity.this,"product deleted",Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(EditProductActivity.this, SellerProductCategoryActivity.class);
+                dialog.dismisDialog();
+                Intent intent = new Intent(EditProductActivity.this, AdminMainActivity.class);
                 startActivity(intent);
             }
         });
@@ -81,9 +85,12 @@ public class EditProductActivity extends AppCompatActivity implements View.OnCli
 
         switch (view.getId()){
             case R.id.apply_changes_btn:{
+                dialog.loadDialog(EditProductActivity.this);
                 updateChanges();
+
                 break;
             } case R.id.delete_product:{
+                dialog.loadDialog(EditProductActivity.this);
                 deleteProduct();
                 break;
             }
