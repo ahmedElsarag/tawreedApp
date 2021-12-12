@@ -1,6 +1,7 @@
 package com.example.ecommerce.adapter;
 
 import android.content.Context;
+import android.icu.text.Transliterator;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,8 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class CheckProductAdapter extends RecyclerView.Adapter<CheckProductAdapter.ProductsViewHolder>{
 
@@ -54,16 +57,7 @@ public class CheckProductAdapter extends RecyclerView.Adapter<CheckProductAdapte
         holder.binding.itemCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                databaseReference = FirebaseDatabase.getInstance().getReference().child("products");
-                databaseReference.child(list.get(position).getPid()).child("productState")
-                        .setValue("approved").addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        Toast.makeText(context,"product approved",Toast.LENGTH_LONG).show();
-                        list.remove(position);
-                        notifyDataSetChanged();
-                    }
-                });
+              approveDialog(context,position);
             }
         });
     }
@@ -79,5 +73,39 @@ public class CheckProductAdapter extends RecyclerView.Adapter<CheckProductAdapte
             super(binding.getRoot());
             this.binding = binding;
         }
+    }
+
+    public void approveDialog(Context context,final int position) {
+        new SweetAlertDialog(context, SweetAlertDialog.WARNING_TYPE)
+                .setTitleText("sure to approve product?")
+                .setContentText("Won't be able to delete!")
+                .setConfirmText("Approve")
+                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sDialog) {
+                        sDialog.dismissWithAnimation();
+                        approveProduct(position);
+                    }
+                })
+                .setCancelButton("Cancel", new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sDialog) {
+                        sDialog.dismissWithAnimation();
+                    }
+                })
+                .show();
+    }
+
+    public void approveProduct(final int position){
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("products");
+        databaseReference.child(list.get(position).getPid()).child("productState")
+                .setValue("approved").addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                Toast.makeText(context,"product approved",Toast.LENGTH_LONG).show();
+                list.remove(position);
+                notifyDataSetChanged();
+            }
+        });
     }
 }

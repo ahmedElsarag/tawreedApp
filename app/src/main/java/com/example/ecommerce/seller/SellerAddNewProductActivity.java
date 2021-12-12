@@ -187,7 +187,8 @@ public class SellerAddNewProductActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             Intent intent = new Intent(SellerAddNewProductActivity.this, SellerDashboardActivity.class);
                             startActivity(intent);
-                            Toast.makeText(SellerAddNewProductActivity.this, "Product is added successfully..", Toast.LENGTH_SHORT).show();
+                            finish();
+                            Toast.makeText(SellerAddNewProductActivity.this, "Product added successfully..", Toast.LENGTH_SHORT).show();
                         } else {
                             String message = task.getException().toString();
                             Toast.makeText(SellerAddNewProductActivity.this, "Error: " + message, Toast.LENGTH_SHORT).show();
